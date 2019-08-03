@@ -3,6 +3,7 @@ import MaterialTable from 'material-table';
 import './TableEmployee.scss'
 import axios from 'axios'
 import Snackbar from '../Snackbar/Snackbar'
+import API from '../../../utility/API';
 
 export default function MaterialTableDemo(props) {
   const [openSnack, setOpenSnack] = React.useState(false);
@@ -33,14 +34,14 @@ export default function MaterialTableDemo(props) {
                 salary: newData.employee_salary,
                 age: newData.employee_age,
               };
-              axios.post('http://dummy.restapiexample.com/api/v1/create', dataEmployee)
-              .then(function (response) {
-                // Memanggil api lagi supaya data terbaru muncul
-                props.callApiGetEmployee();
-                //Memunculkan notifikasi snackbar
-                setMessageSnack("Selamat ! data berhasil ditambahkan.");
-                setOpenSnack(true);
-              })
+              API.addEmploye(dataEmployee)
+                .then(function(response){
+                  // Memanggil api lagi supaya data terbaru muncul
+                  props.callApiGetEmployee();
+                  //Memunculkan notifikasi snackbar
+                  setMessageSnack("Selamat ! data berhasil ditambahkan.");
+                  setOpenSnack(true);
+                })
             }, 600);
           })
           ,
@@ -54,7 +55,7 @@ export default function MaterialTableDemo(props) {
               salary: newData.employee_salary,
               age: newData.employee_age,
             };
-            axios.put('http://dummy.restapiexample.com/api/v1/update/'+oldData.id, dataEmployee)
+            API.updateEmploye(oldData,dataEmployee)
               .then(function (response) {
                 // Memanggil api lagi supaya data terbaru muncul
                 props.callApiGetEmployee();
@@ -68,7 +69,7 @@ export default function MaterialTableDemo(props) {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              axios.delete('http://dummy.restapiexample.com/api/v1/delete/'+oldData.id)
+            API.deleteEmploye(oldData)
               .then(function (response) {
                 // Memanggil api lagi supaya data terbaru muncul
                 props.callApiGetEmployee();
