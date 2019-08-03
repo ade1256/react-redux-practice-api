@@ -34,7 +34,7 @@ export default function MaterialTableDemo(props) {
                 salary: newData.employee_salary,
                 age: newData.employee_age,
               };
-              API.addEmploye(dataEmployee)
+              API.addEmployee(dataEmployee)
                 .then(function(response){
                   // Memanggil api lagi supaya data terbaru muncul
                   props.callApiGetEmployee();
@@ -55,7 +55,7 @@ export default function MaterialTableDemo(props) {
               salary: newData.employee_salary,
               age: newData.employee_age,
             };
-            API.updateEmploye(oldData,dataEmployee)
+            API.updateEmployee(oldData.id,dataEmployee)
               .then(function (response) {
                 // Memanggil api lagi supaya data terbaru muncul
                 props.callApiGetEmployee();
@@ -69,7 +69,7 @@ export default function MaterialTableDemo(props) {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-            API.deleteEmploye(oldData)
+            API.deleteEmployee(oldData.id)
               .then(function (response) {
                 // Memanggil api lagi supaya data terbaru muncul
                 props.callApiGetEmployee();

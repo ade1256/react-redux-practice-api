@@ -19,7 +19,7 @@ class Home extends Component {
                 { title: 'Name', field: 'employee_name' },
                 { title: 'Salary', field: 'employee_salary', type: 'numeric' },
                 { title: 'Age', field: 'employee_age', type: 'numeric' },
-                { title: 'Image', field: 'employee_image' }
+                { title: 'Image', field: 'employee_image', editable: 'never' }
               ],
         };
     }
