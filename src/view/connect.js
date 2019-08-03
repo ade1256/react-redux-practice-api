@@ -12,6 +12,7 @@ function GetDeep(paths) {
         }, state)
     }
 }
+
 function Subs(subscription) {
     const module = subscription.split('/')[0]
     const child = subscription.split('/').slice(1).join('/')

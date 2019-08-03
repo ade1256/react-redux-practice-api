@@ -4,10 +4,9 @@ import axios from 'axios'
 import Layout from '../layout/Layout'
 import TableEmployee from '../component/TableEmployee/TableEmployee'
 
-
 function mapStateToProps(state) {
     return {
-        
+        dataTableEmploye: state.dataTableEmploye,
     };
 }
 
@@ -16,21 +15,18 @@ class Home extends Component {
         super(props);
         this.state = {
             columns: [
-                { title: 'ID', field: 'id' },
+                { title: 'ID', field: 'id', editable: 'never'},
                 { title: 'Name', field: 'employee_name' },
-                { title: 'Salary', field: 'employee_salary' },
-                { title: 'Age', field: 'employee_age' },
+                { title: 'Salary', field: 'employee_salary', type: 'numeric' },
+                { title: 'Age', field: 'employee_age', type: 'numeric' },
                 { title: 'Image', field: 'employee_image' }
-              ],
-              data: [
-                {id:"1",employee_name: 'Fikri', employee_salary: '3000000', employee_age:20, employee_image:"" },
               ],
         };
     }
-    
 
     async componentDidMount(){
         await this.getEmployee();
+        console.log(mapStateToProps)
     }
 
     async getEmployee(){
@@ -59,7 +55,9 @@ class Home extends Component {
                     <div className="mt-48">
                         <TableEmployee 
                         columns={this.state.columns} 
-                        data={this.state.dataTableEmploye}  />
+                        data={this.state.dataTableEmploye}
+                        callApiGetEmployee={() =>this.getEmployee()}  // Memasukan fungsi kedalam props
+                        />
                     </div>
                 </Layout>
             </div>
